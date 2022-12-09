@@ -122,26 +122,28 @@ public class join_view extends JFrame {
 		duplicateBtn = new JButton("중복");
 		duplicateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String id = tfUserID.getText(); // 체크할 아이디
-				String checkId=""; // sql문의 아이디
-				// DB에서 받아올 아이디 변수
-				ResultSet rs  = db.executeQuery("SELECT 회원아이디 FROM 회원 WHERE 회원아이디 = '"+id+"'");
-				System.out.println("SELECT 회원아이디 FROM 회원 WHERE 회원아이디 = '"+id+"'");
+				String inputId = tfUserID.getText(); // 체크할 아이디
+				System.out.println(inputId);
+				String checkId=""; // sql문에서 받아올 아이디
+				ResultSet rs  = db.executeQuery("SELECT 회원아이디 FROM 회원 WHERE 회원아이디 = '"+inputId+"'");
+				System.out.println("SELECT 회원아이디 FROM 회원 WHERE 회원아이디 = '"+inputId+"'");
 				try {
 					while(rs.next()) {
 						checkId = rs.getString(1);
+						if (checkId==inputId) {
+							JOptionPane.showMessageDialog(null,"중복됩니다.");
+						}
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				System.out.println(checkId);
-				System.out.println(id);
-				if (id==checkId) {
+				if (inputId.equals(checkId)) {
 					JOptionPane.showMessageDialog(null,"중복됩니다.");
 				}
 				else {
 					JOptionPane.showMessageDialog(null,"사용가능") ;
 				}
+				System.out.println(checkId);
 			}
 		});
 		duplicateBtn.setBounds(350, 110, 70, 29);
