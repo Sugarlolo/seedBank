@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import DB.DB_Conn_Query;
 
 public class login_view extends JFrame {
 	private Main main;
@@ -89,6 +90,10 @@ public class login_view extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String id = userText.getText();
+				String pw = String.valueOf(passText.getPassword());
+				
+				String query ="";
 //				String idstr = userText.getText();
 //				String passtr = passText.getText();
 //				

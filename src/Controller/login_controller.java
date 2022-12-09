@@ -19,7 +19,7 @@ public class login_controller {
 	public login_controller() { // 클래스 생성하면서 MySQL이랑 연동
 		try {
 			// 여기서 'java_team1'은 스키마
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/java_team1?serverTimezone=UTC", "root",
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "bank",
 					"1234");
 		} catch (Exception e) { // 예외처리
 			e.printStackTrace();
