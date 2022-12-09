@@ -7,10 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controller.loginSystem;
 import DB.DB_Conn_Query;
 
 public class login_view extends JFrame {
@@ -93,22 +95,18 @@ public class login_view extends JFrame {
 				String id = userText.getText();
 				String pw = String.valueOf(passText.getPassword());
 				
-				String query ="";
-//				String idstr = userText.getText();
-//				String passtr = passText.getText();
-//				
-//				if (dao.isLoginCheck(idstr, passtr) == true) {
-//					System.out.println("로그인 성공!");
-//					dao.login_user(idstr);
-//					String id_str =  LoginUser.getInstance().getId();
-//					System.out.println("!!"+id_str);
-//					
-//					new main_view();
-//				} else {
-//					System.out.println("로그인 실패..");
-//				}
-				new main_view();
-				dispose();
+				loginSystem login = new loginSystem();
+				String m = login.loginSystem(id,pw);
+				if(m==null) {
+					JOptionPane.showMessageDialog(null, "로그인에 실패했습니다.");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "로그인되었습니다.");
+					new main_view();
+					dispose();
+				}
+				
+				
 				
 			}
 		});
