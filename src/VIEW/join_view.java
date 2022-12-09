@@ -3,6 +3,8 @@ package VIEW;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -11,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import DB.DB_Conn_Query;
 
 public class join_view extends JFrame {
 
@@ -24,9 +28,11 @@ public class join_view extends JFrame {
 	private JTextField tfBirth;
 	private JTextField tfPhone;
 	private JTextField textField;
+	DB_Conn_Query db = new DB_Conn_Query();
 
 	// 실행
 	public class Joinrun {
+		
 		public Joinrun() {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
@@ -43,6 +49,7 @@ public class join_view extends JFrame {
 
 	// 회원가입 창
 	public join_view() {
+		
 		super("회원가입");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,7 +117,33 @@ public class join_view extends JFrame {
 		joinCompleteBtn.setBounds(298, 420, 139, 29);
 		contentPane.add(joinCompleteBtn);
 
+		// 회원가입시 중복 확인버튼
+		
 		duplicateBtn = new JButton("중복");
+		duplicateBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = tfUserID.getText(); // 체크할 아이디
+				String checkId=""; // sql문의 아이디
+				// DB에서 받아올 아이디 변수
+				ResultSet rs  = db.executeQuery("SELECT 회원아이디 FROM 회원 WHERE 회원아이디 = '"+id+"'");
+				System.out.println("SELECT 회원아이디 FROM 회원 WHERE 회원아이디 = '"+id+"'");
+				try {
+					while(rs.next()) {
+						checkId = rs.getString(1);
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				System.out.println(checkId);
+				System.out.println(id);
+				if (id==checkId) {
+					JOptionPane.showMessageDialog(null,"중복됩니다.");
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"사용가능") ;
+				}
+			}
+		});
 		duplicateBtn.setBounds(350, 110, 70, 29);
 		contentPane.add(duplicateBtn);
 		
