@@ -182,6 +182,35 @@ public class seed_devide_write {
 		JButton btnAdd = new JButton("신청");
 		btnAdd.setBounds(339, 481, 95, 23);
 		frame.getContentPane().add(btnAdd);
+		
+		JButton refreshBtn = new JButton("새로고침");
+		refreshBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				model2.setNumRows(0);
+				String sql = "select * from 분양 where 회원아이디 = 'qwer'";
+				ResultSet rs = db.executeQuery(sql);
+				try {
+					String row[] = new String[8];
+					while(rs.next()) {
+						String t = rs.getString(6);
+						t = t.substring(0,10);
+						row[0] = rs.getString(1);
+						row[1] = Integer.toString(rs.getInt(2));
+						row[2] = Integer.toString(rs.getInt(3));
+						row[3] = rs.getString(4);
+						row[4] = rs.getString(5);
+						row[5] = t;
+						row[6] = rs.getString(7);
+						row[7] = Integer.toString(rs.getInt(8));
+						model2.addRow(row);
+					}
+				} catch (SQLException e4) {
+					e4.printStackTrace();
+				}
+			}
+		});
+		refreshBtn.setBounds(477, 481, 97, 23);
+		frame.getContentPane().add(refreshBtn);
 
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -219,13 +248,7 @@ public class seed_devide_write {
 				String sql3 = "INSERT INTO 분양 VALUES('qwer',"+s_number+","+num+",'"+SeedName_str+"',"
 						+ "'이원석','22/12/11','001',"+Integer.parseInt(SeedLeft_str)+")";
 				ResultSet rs3 = db.executeQuery(sql3);
-				try {
-					rs3.next();
-				}catch (SQLException e3) {
-					e3.printStackTrace();
-				}
 				System.out.println(sql3);
-			
 			}
 		});
 
