@@ -100,8 +100,6 @@ public class login_view extends JFrame {
 		
 		
 		// 로그인 버튼
-		
-		
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
