@@ -30,7 +30,7 @@ public class seed_search_write extends JFrame {
 	private JTextField tfFrom;
 	private JTextField tfSname;
 	private JFrame frame;
-	DefaultTableModel model;
+
 	DB_Conn_Query db = new DB_Conn_Query();
 
 	/**
@@ -70,7 +70,7 @@ public class seed_search_write extends JFrame {
 
 		// 누락되어있었음
 		frame.setVisible(true);
-		frame.setSize(1085, 421);
+		frame.setSize(1045, 310);
 
 		lblJoin = new JLabel("자원정보검색");
 		lblJoin.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
@@ -102,19 +102,29 @@ public class seed_search_write extends JFrame {
 		JButton btnsearch = new JButton("찾기");
 		btnsearch.setBounds(253, 209, 89, 23);
 		contentPane.add(btnsearch);
-
+		
 		JComboBox cb_list = new JComboBox();
-		cb_list.setModel(
-				new DefaultComboBoxModel(new String[] { "약료작물", "기호료작물", "섬유로작물", "향료작물", "당료작물", "유료작물", "식용작물" }));
+		cb_list.setModel(new DefaultComboBoxModel(new String[] {"약료작물", "기호료작물", "섬유로작물", "향료작물", "당료작물", "유료작물", "식용작물"}));
 		cb_list.setBounds(159, 209, 95, 23);
 		contentPane.add(cb_list);
-
+		
 		JLabel lblJoin_1 = new JLabel("자원목록");
 		lblJoin_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		lblJoin_1.setBounds(697, 43, 148, 20);
 		contentPane.add(lblJoin_1);
+		
+		String[] headings = new String[] {"자원명","수량","원산지","수집지","자원구분","평균수명"};
+		DefaultTableModel model = new DefaultTableModel(headings, 0);
+		JTable table = new JTable(model);
+		JScrollPane jsp = new JScrollPane(table,
+		JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		table.setFillsViewportHeight(true);
+		frame.getContentPane().add(jsp);
+		jsp.setBounds(445, 84, 565, 158);
 
-		// 찾기 버튼
+
+		//찾기 버튼 
 		btnsearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String SnameStr = tfSname.getText();
@@ -127,28 +137,32 @@ public class seed_search_write extends JFrame {
 				try {
 					String row[] = new String[6];
 					PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
-					pstmt.setString(1, SnameStr);
-					pstmt.setString(2, FromStr);
-					pstmt.setString(3, checksearch);
+					pstmt.setString(1,SnameStr);
+					pstmt.setString(2,FromStr);
+					pstmt.setString(3,checksearch);
 					pstmt.executeQuery();
-					while (rs.next()) {
+					while(rs.next()) {			
 						row[0] = rs.getString(1);
-						row[1] = Integer.toString(rs.getInt(2));
+						row[1] = Integer.toString(rs.getInt(2)); 
 						row[2] = rs.getString(3);
 						row[3] = rs.getString(4);
 						row[4] = rs.getString(5);
-						row[5] = Integer.toString(rs.getInt(6));
-
+						row[5] = Integer.toString(rs.getInt(6)); 
+						
 						model.addRow(row);
 						pstmt.close();
 					}
 					rs.close();
-				} catch (SQLException e1) {
+				}catch(SQLException e1){
 					e1.printStackTrace();
-				}
+				}			
 				frame.setVisible(false);
 			}
 		});
+
+		
+
+
 
 	}
 }
