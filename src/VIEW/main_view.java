@@ -28,6 +28,17 @@ public class main_view extends JFrame {
 		btn1.setBounds(66, 200, 100, 100); // 가로위치,세로위치,폭,넓이
 
 		Main_CP.add(btn2 = new JButton("자원분양"));
+		
+		//직원 자원관리 탭
+		
+		JButton btn3 = new JButton("자원관리...");
+		btn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btn3.setBounds(150, 332, 97, 23);
+		getContentPane().add(btn3);
 		btn2.setBounds(220, 200, 100, 100);
 
 //		Main_CP.add(btn3 = new JButton("홍보 게시판"));

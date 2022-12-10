@@ -83,10 +83,11 @@ public class login_view extends JFrame {
 		btnLogin.setBounds(160, 80, 100, 25);
 		panel.add(btnLogin);
 		
-		String[] login_list = { "일반회원", "직원" };
-		JComboBox login = new JComboBox(login_list);
-		login.setBounds(10, 107, 100, 23);
-		panel.add(login);
+		JComboBox login_box = new JComboBox();
+		login_box.addItem("회원");
+		login_box.addItem("직원");
+		login_box.setBounds(10, 107, 100, 23);
+		panel.add(login_box);
 		
 		
 		// 로그인 버튼
@@ -100,17 +101,21 @@ public class login_view extends JFrame {
 				
 				loginSystem login = new loginSystem();
 				String m = login.loginSystem(id,pw);
-				if(m==null) {
-					JOptionPane.showMessageDialog(null, "로그인에 실패했습니다.");
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "로그인되었습니다.");
+				if (login_box.getSelectedItem().equals("직원")) {
+					JOptionPane.showMessageDialog(null, "직원으로 로그인");
 					new main_view();
 					dispose();
 				}
-				
-				
-				
+				else {
+					if(m==null) {
+						JOptionPane.showMessageDialog(null, "로그인에 실패했습니다.");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "로그인되었습니다.");
+						new main_view();
+						dispose();
+					}
+				}	
 			}
 		});
 	}

@@ -161,6 +161,8 @@ public class join_view extends JFrame {
 		tfDiv.setBounds(159, 366, 186, 35);
 		contentPane.add(tfDiv);
 
+		// 회원가입 완료
+		
 		joinCompleteBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
