@@ -146,11 +146,11 @@ public class seed_ManagementUI extends JFrame {
 		getContentPane().add(dateCheckBtn);
 		
 		JLabel totalLabel = new JLabel("총합 :");
-		totalLabel.setBounds(12, 179, 40, 15);
+		totalLabel.setBounds(24, 179, 40, 15);
 		getContentPane().add(totalLabel);
 		
 		
-		totalLabel2.setBounds(62, 179, 57, 15);
+		totalLabel2.setBounds(76, 179, 57, 15);
 		getContentPane().add(totalLabel2);
 		
 		

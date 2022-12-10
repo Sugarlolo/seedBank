@@ -173,3 +173,14 @@ insert into 직원 values ('002','장대윤','대한종자','부산','010-3613-6
 insert into 직원 values ('003','임환섭','대한종자','부산','010-1234-5678','-');
 insert into 직원 values ('004','박태억','대한종자','부산','010-1234-5678','-');
 insert into 직원 values ('005','장시웅','대한종자','부산','010-1234-5678','-');
+
+-- 일자별 공급합계 저장 프로시저
+
+create or replace NONEDITIONABLE PROCEDURE 일자별공급량합계(
+Pi_일자 in DATE,
+Po_합계 out NUMBER
+)AS
+BEGIN
+SELECT sum(공급량) into Po_합계
+FROM 종자 WHERE 공급일자 = Pi_일자;
+END;
