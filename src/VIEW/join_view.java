@@ -173,6 +173,9 @@ public class join_view extends JFrame {
 				String phoneStr = tfPhone.getText();
 				String div = tfDiv.getText();
 				if (OK == true) {
+					
+					// PreparedStatement 사용
+					
 					String sql = "INSERT INTO 회원 VALUES (?,?,?,?,?,?)";
 						try {
 							PreparedStatement pstmt = db.getConnection().prepareStatement(sql);

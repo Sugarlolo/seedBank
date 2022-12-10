@@ -88,7 +88,10 @@ public class login_view extends JFrame {
 		login.setBounds(10, 107, 100, 23);
 		panel.add(login);
 		
-
+		
+		// 로그인 버튼
+		
+		
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
