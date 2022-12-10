@@ -31,7 +31,6 @@ public class seed_search_write extends JFrame {
 	private JTextField tfSname;
 	private JFrame frame;
 
-
 	DB_Conn_Query db = new DB_Conn_Query();
 
 	/**
@@ -71,7 +70,7 @@ public class seed_search_write extends JFrame {
 
 		// 누락되어있었음
 		frame.setVisible(true);
-		frame.setSize(1043, 321);
+		frame.setSize(1045, 310);
 
 		lblJoin = new JLabel("자원정보검색");
 		lblJoin.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
@@ -111,7 +110,7 @@ public class seed_search_write extends JFrame {
 		
 		JLabel lblJoin_1 = new JLabel("자원목록");
 		lblJoin_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblJoin_1.setBounds(620, 43, 148, 20);
+		lblJoin_1.setBounds(697, 43, 148, 20);
 		contentPane.add(lblJoin_1);
 		
 		String[] headings = new String[] {"자원명","수량","원산지","수집지","자원구분","평균수명"};
@@ -122,8 +121,9 @@ public class seed_search_write extends JFrame {
 		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		table.setFillsViewportHeight(true);
 		frame.getContentPane().add(jsp);
-		jsp.setBounds(422, 73, 568, 180);
-		
+		jsp.setBounds(445, 84, 565, 158);
+
+
 		//찾기 버튼 
 		btnsearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -158,7 +158,6 @@ public class seed_search_write extends JFrame {
 				//frame.setVisible(false);
 			}
 		});
-		
 
 		
 
