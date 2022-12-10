@@ -34,7 +34,8 @@ public class main_view extends JFrame {
 		JButton btn3 = new JButton("자원관리...");
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new seed_ManagementUI();
+				setVisible(true);
 			}
 		});
 		btn3.setBounds(150, 332, 97, 23);
