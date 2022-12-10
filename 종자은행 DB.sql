@@ -173,3 +173,78 @@ insert into 직원 values ('002','장대윤','대한종자','부산','010-3613-6
 insert into 직원 values ('003','임환섭','대한종자','부산','010-1234-5678','-');
 insert into 직원 values ('004','박태억','대한종자','부산','010-1234-5678','-');
 insert into 직원 values ('005','장시웅','대한종자','부산','010-1234-5678','-');
+
+-- 일자별 공급합계 저장 프로시저
+
+create or replace NONEDITIONABLE PROCEDURE 일자별공급량합계(
+Pi_일자 in DATE,
+Po_합계 out NUMBER
+)AS
+BEGIN
+SELECT sum(공급량) into Po_합계
+FROM 종자 WHERE 공급일자 = Pi_일자;
+END;
+
+
+
+
+분양 테이블 수정 -> 담당자를 외래키로 받음(예 : 001)
+	          -> 분양수량 속성 추가
+
+-----------------------------------------------------------
+
+CREATE TABLE  분양 (
+	회원아이디  VARCHAR(20) NOT NULL,
+    자원번호 NUMBER(5) NOT NULL,
+	분양번호  NUMBER(10),
+    자원명 VARCHAR(30),
+    분양신청인 VARCHAR(10),
+    분양신청일 DATE,
+    담당자 VARCHAR(10),
+    분양수량 NUMBER(20),
+    FOREIGN KEY (회원아이디) references 회원(회원아이디),
+    FOREIGN KEY (자원번호) references 종자(자원번호),
+    FOREIGN KEY (담당자) references 직원(직원번호),
+    PRIMARY KEY (회원아이디,자원번호)
+);
+
+트리거
+-----------------------------------------------------------
+
+create or replace trigger t_종자량수정
+after insert
+on 분양
+for each row
+begin
+    update 종자 set 수량 = 수량 - :nwe.분양수량 where 자원번호 = :new.자원번호;
+end;
+
+insert into 분양 values ('qwer',100,001,'대나무', '도널드', '2022/12/08', '김현수', 1);
+
+-----------------------------------------------------------
+
+
+
+저장프로시저
+-----------------------------------------------------------
+분양테이블의 테이블에 가장 최신에 삽입된 값에 따라감
+insert into 분양 values ('qwer',100,001,'대나무', '도널드', '2022/12/08', '001', 1);
+insert into 분양 values ('qwer',99,002,'삼', '도널드', '2022/12/08', '001', 1);
+이러면 가장 마지막에 들어간 삼의 이름이 들어가게됨
+
+create or replace procedure p_담당자
+as
+    v_담당자 VARCHAR(10);
+    v_담당자원 VARCHAR(10);
+cursor c is select 담당자,자원명 from 분양;
+begin
+    open c;
+        loop
+            fetch c into v_담당자, v_담당자원;
+            exit when c%notfound;
+            update 직원 set 담당분야 = v_담당자원 where 직원번호 = v_담당자;
+        end loop;
+    close c;
+end p_담당자;    
+
+execute p_담당자();

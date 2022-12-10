@@ -131,9 +131,7 @@ public class seed_devide_view {
 				
 			}
 		});
-
-		
-		
+	
 		JButton main_btn = new JButton("메인메뉴");
 		main_btn.setBounds(2, 96, 173, 106);
 		frame.getContentPane().add(main_btn);
