@@ -41,22 +41,12 @@ public class main_view extends JFrame {
 		getContentPane().add(btn3);
 		btn2.setBounds(220, 200, 100, 100);
 
-//		Main_CP.add(btn3 = new JButton("홍보 게시판"));
-//		btn3.setBounds(66, 350, 100, 100);
-//
-//		Main_CP.add(btn4 = new JButton("지도 "));
-//		btn4.setBounds(220, 350, 100, 100);
-//
-//		Main_CP.add(btn5 = new JButton("채팅"));
-//		btn5.setBounds(66, 500, 100, 100);
-//
-//		Main_CP.add(btn6 = new JButton("문의사항"));
-//		btn6.setBounds(220, 500, 100, 100);
 
 		//  종자검색 버튼처리
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new seed_search_write();
+				dispose();
 				
 			}
 		});
@@ -65,6 +55,7 @@ public class main_view extends JFrame {
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new seed_devide_view(); 
+				dispose();
 			}
 		});
 	}

@@ -139,6 +139,7 @@ public class seed_devide_view {
 			public void actionPerformed(ActionEvent e) {
 				
 				frame.setVisible(false);
+				frame.dispose();
 				new main_view();
 			}
 		});
