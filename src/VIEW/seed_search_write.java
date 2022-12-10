@@ -7,7 +7,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import DB.DB_Conn_Query;
 
@@ -67,7 +70,7 @@ public class seed_search_write extends JFrame {
 
 		// 누락되어있었음
 		frame.setVisible(true);
-		frame.setSize(486, 421);
+		frame.setSize(1043, 321);
 
 		lblJoin = new JLabel("자원정보검색");
 		lblJoin.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
@@ -105,6 +108,21 @@ public class seed_search_write extends JFrame {
 		cb_list.setBounds(159, 209, 95, 23);
 		contentPane.add(cb_list);
 		
+		JLabel lblJoin_1 = new JLabel("자원목록");
+		lblJoin_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		lblJoin_1.setBounds(620, 43, 148, 20);
+		contentPane.add(lblJoin_1);
+		
+		String[] headings = new String[] {"자원명","수량","원산지","수집지","자원구분","평균수명"};
+		DefaultTableModel model = new DefaultTableModel(headings, 0);
+		JTable table = new JTable(model);
+		JScrollPane jsp = new JScrollPane(table,
+		JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		table.setFillsViewportHeight(true);
+		frame.getContentPane().add(jsp);
+		jsp.setBounds(422, 73, 568, 180);
+		
 		btnsearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String SnameStr = tfSname.getText();
@@ -121,12 +139,12 @@ public class seed_search_write extends JFrame {
 					pstmt.close();
 				}catch(SQLException e1){
 					e1.printStackTrace();
-				}
-				
-				frame.setVisible(false);
-				new seed_search_view();
+				}			
 			}
 		});
+		
+
+		
 
 
 

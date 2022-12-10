@@ -66,8 +66,7 @@ public class seed_devide_view {
 		String[] headings = new String[] {"회원아이디","자원번호","분양번호","자원명","분양신청인","분양신청일","담당자","분양수량"};
 		DefaultTableModel model = new DefaultTableModel(headings, 0);
 		table = new JTable(model);
-		JScrollPane jsp = new JScrollPane(table,
-		JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane jsp = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		String query = "select 회원아이디,자원번호,분양번호,자원명,분양신청인,분양신청일,담당자,분양수량 from 분양";
 		ResultSet rs = db.executeQuery(query);
