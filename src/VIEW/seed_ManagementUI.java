@@ -91,7 +91,6 @@ public class seed_ManagementUI extends JFrame {
 		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		table.setFillsViewportHeight(true);
 		getContentPane().add(jsp);
-
 		jsp.setBounds(145, 26, 715, 186);
 		
 		
@@ -148,7 +147,6 @@ public class seed_ManagementUI extends JFrame {
 		JLabel totalLabel = new JLabel("총합 :");
 		totalLabel.setBounds(24, 179, 40, 15);
 		getContentPane().add(totalLabel);
-		
 		
 		totalLabel2.setBounds(76, 179, 57, 15);
 		getContentPane().add(totalLabel2);

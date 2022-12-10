@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import DB.DB_Conn_Query;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/Sugarlolo/seedBank.git
 
 public class loginSystem {
 	
@@ -22,6 +24,7 @@ public class loginSystem {
 					success = true;
 				}
 			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
