@@ -25,7 +25,6 @@ public class seed_search_write extends JFrame {
 	private JTextField tfFrom;
 	private JTextField tfSname;
 	private JFrame frame;
-	private boolean OK;
 	DB_Conn_Query db = new DB_Conn_Query();
 
 	/**
@@ -109,10 +108,8 @@ public class seed_search_write extends JFrame {
 				String FromStr = tfFrom.getText();
 				String checksearch = cb_list.getSelectedItem().toString();
 				// PreparedStatement 사용
-				  if(OK == true) { 
-					  String sql = "select ?,?,?,?,?,? from ?";
-				  }
-				frame.setVisible(false);
+				
+				//frame.setVisible(false);
 				new seed_search_view();
 			}
 		});
