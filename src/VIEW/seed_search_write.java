@@ -31,7 +31,6 @@ public class seed_search_write extends JFrame {
 	private JTextField tfSname;
 	private JFrame frame;
 
-
 	DB_Conn_Query db = new DB_Conn_Query();
 
 	/**
@@ -61,6 +60,7 @@ public class seed_search_write extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame("자원정보검색");
 		frame.setBounds(100, 100, 463, 526);
 		frame.setLocationRelativeTo(null);
@@ -132,7 +132,12 @@ public class seed_search_write extends JFrame {
 				String checksearch = cb_list.getSelectedItem().toString();
 				// PreparedStatement 사용
 				
+<<<<<<< HEAD
 				String sql = "select 자원명,수량,원산지,수집지,자원구분,평균수명 from 종자 where 자원명 = (?) and 원산지 = (?) and 자원구분 = (?)";				
+=======
+				String sql = "select 자원명,수량,원산지,수집지,자원구분,평균수명 from 종자 where 자원명 = (?) and 원산지 = (?) and 자원구분 = (?)";
+				
+>>>>>>> branch 'main' of https://github.com/Sugarlolo/seedBank.git
 				try {
 					String row[] = new String[6];
 					PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
@@ -159,3 +164,4 @@ public class seed_search_write extends JFrame {
 		});
 	}
 }
+

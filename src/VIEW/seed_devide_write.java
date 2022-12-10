@@ -21,9 +21,8 @@ import javax.swing.JTable;
 import DB.DB_Conn_Query;
 
 import java.awt.Font;
-
 public class seed_devide_write {
-
+	public static String ID;
 	private JFrame frame;
 	private JTextField txSeedName1;
 	private JTextField txSeedName2;

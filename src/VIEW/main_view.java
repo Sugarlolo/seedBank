@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 
 
 public class main_view extends JFrame {
-	
 	public main_view() {
 		setTitle("종자은행메뉴");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// x 누르면 프로세스 종료		

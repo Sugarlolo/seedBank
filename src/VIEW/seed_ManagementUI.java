@@ -26,6 +26,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import DB.DB_Conn_Query;
@@ -33,6 +35,8 @@ import java.awt.ScrollPane;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class seed_ManagementUI extends JFrame {
 	private int s_Id;
@@ -72,6 +76,7 @@ public class seed_ManagementUI extends JFrame {
 		getContentPane().add(jsp2);
 		jsp2.setBounds(145, 247, 715, 186);
 		
+		
 		// 리프레시
 		JButton loadBtn = new JButton("불러오기");
 		loadBtn.addActionListener(new ActionListener() {
@@ -82,6 +87,7 @@ public class seed_ManagementUI extends JFrame {
 					String row2[] = new String[8];
 					PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
 					ResultSet rs = pstmt.executeQuery();
+					System.out.println();
 					while(rs.next()) {
 						String t=rs.getString(6);
 						t=t.substring(0,10);
@@ -95,7 +101,8 @@ public class seed_ManagementUI extends JFrame {
 						row2[7] = Integer.toString(rs.getInt(8));
 						model2.addRow(row2);
 					}
-					
+					rs.close();
+					pstmt.close();
 				} catch (SQLException e2) {
 					e2.printStackTrace();
 				}

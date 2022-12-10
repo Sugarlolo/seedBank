@@ -100,6 +100,10 @@ public class login_view extends JFrame {
 		
 		
 		// 로그인 버튼
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'main' of https://github.com/Sugarlolo/seedBank.git
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
