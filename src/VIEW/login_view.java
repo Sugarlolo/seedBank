@@ -41,6 +41,21 @@ public class login_view extends JFrame {
 
 		getContentPane().add(panel);
 		
+		// 관리자 버튼 누를 시
+		
+		JButton btnAdmin = new JButton("관리자...");
+		btnAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (String.valueOf(passText.getPassword()).equals("system")) {
+					JOptionPane.showMessageDialog(null, "관리자로 로그인");
+					new seed_ManagementUI();
+					dispose();
+				}
+			}
+		});
+		btnAdmin.setBounds(100, 128, 97, 23);
+		panel.add(btnAdmin);
+		
 
 
 		setVisible(true);
@@ -68,7 +83,7 @@ public class login_view extends JFrame {
 
 		btnInit = new JButton("Join");
 
-		btnInit.setBounds(10, 80, 100, 25);
+		btnInit.setBounds(20, 80, 100, 25);
 
 		panel.add(btnInit);
 
@@ -83,12 +98,6 @@ public class login_view extends JFrame {
 		btnLogin.setBounds(160, 80, 100, 25);
 		panel.add(btnLogin);
 		
-		JComboBox login_box = new JComboBox();
-		login_box.addItem("회원");
-		login_box.addItem("직원");
-		login_box.setBounds(10, 107, 100, 23);
-		panel.add(login_box);
-		
 		
 		// 로그인 버튼
 		
@@ -101,22 +110,16 @@ public class login_view extends JFrame {
 				
 				loginSystem login = new loginSystem();
 				String m = login.loginSystem(id,pw);
-				if (login_box.getSelectedItem().equals("직원")) {
-					JOptionPane.showMessageDialog(null, "직원으로 로그인");
+				
+				if(m==null) {
+					JOptionPane.showMessageDialog(null, "로그인에 실패했습니다.");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "로그인되었습니다.");
 					new main_view();
 					dispose();
 				}
-				else {
-					if(m==null) {
-						JOptionPane.showMessageDialog(null, "로그인에 실패했습니다.");
-					}
-					else {
-						JOptionPane.showMessageDialog(null, "로그인되었습니다.");
-						new main_view();
-						dispose();
-					}
-				}	
-			}
+			}	
 		});
 	}
 }
