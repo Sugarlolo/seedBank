@@ -30,7 +30,6 @@ public class main_view extends JFrame {
 		Main_CP.add(btn2 = new JButton("자원분양"));
 		
 		//직원 자원관리 탭
-		
 		JButton btn3 = new JButton("자원관리...");
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

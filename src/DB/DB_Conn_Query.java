@@ -17,7 +17,7 @@ public class DB_Conn_Query {
 	public PreparedStatement pstmt = null;
 	
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String id = "bank";      String password = "1234";
+	String id = "C##bank";      String password = "1234";
 	
 	 public DB_Conn_Query() {
 	     try {

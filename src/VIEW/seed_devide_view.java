@@ -1,18 +1,23 @@
 package VIEW;
 
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.JScrollBar;
-import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
+import DB.DB_Conn_Query;
 
 public class seed_devide_view {
 
@@ -23,7 +28,7 @@ public class seed_devide_view {
 	private JTable table;
 	private JTextField tf;
 	private JTable table_1;
-
+	DB_Conn_Query db = new DB_Conn_Query();
 	/**
 	 * Launch the application.
 	 */
@@ -58,6 +63,35 @@ public class seed_devide_view {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		String[] headings = new String[] {"회원아이디","자원번호","분양번호","자원명","분양신청인","분양신청일","담당자","분양수량"};
+		DefaultTableModel model = new DefaultTableModel(headings, 0);
+		table = new JTable(model);
+		JScrollPane jsp = new JScrollPane(table,
+		JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		String query = "select 회원아이디,자원번호,분양번호,자원명,분양신청인,분양신청일,담당자,분양수량 from 분양";
+		ResultSet rs = db.executeQuery(query);
+		try {
+			String row[] = new String[8];
+			while (rs.next()) {
+				row[0] = rs.getString(1);
+				row[1] = Integer.toString(rs.getInt(2));
+				row[2] = Integer.toString(rs.getInt(3));
+				row[3] = rs.getString(4);
+				row[4] = rs.getString(5);
+				row[5] = rs.getString(6);
+				row[6] = rs.getString(7);
+				row[7] = Integer.toString(rs.getInt(8));
+				model.addRow(row);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		table.setFillsViewportHeight(true);
+		frame.add(jsp);
+		jsp.setBounds(187, 96, 717, 384);
+		
 		JLabel title = new JLabel("자원분양");
 		title.setFont(new Font("맑은 고딕", Font.PLAIN, 30));
 		title.setBounds(479, 10, 136, 63);
@@ -71,10 +105,6 @@ public class seed_devide_view {
 		table_1 = new JTable();
 		table_1.setBounds(237, 98, 672, 382);
 		frame.getContentPane().add(table_1);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(907, 96, 17, 384);
-		frame.getContentPane().add(scrollBar);
 		
 		JComboBox search_list = new JComboBox();
 		search_list.setModel(new DefaultComboBoxModel(new String[] {"분양번호", "담당자", "자원번호", "신청인"}));
