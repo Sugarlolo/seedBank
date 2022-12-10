@@ -43,7 +43,7 @@ public class main_view extends JFrame {
 		// 자원분양 버튼 처리
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new seed_devide_view(); 
+				new seed_devide_write(); 
 				dispose();
 			}
 		});

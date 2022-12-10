@@ -16,12 +16,17 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import DB.DB_Conn_Query;
+import java.awt.Font;
 
 public class seed_devide_write {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField txSeedName1;
+	private JTextField txSeedName2;
+	private JTextField txSeedName3;
+	
 	DB_Conn_Query db = new DB_Conn_Query();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -51,58 +56,44 @@ public class seed_devide_write {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("종자분양신청하기");
-		frame.setBounds(100, 100, 600, 315);
+		frame.setBounds(100, 100, 605, 561);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		
+		JLabel lblNewLabel = new JLabel("분양검색");
+		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel.setBounds(12, 16, 88, 15);
+		frame.getContentPane().add(lblNewLabel);
+		
+		//검색용 테이블
 		String[] headings = new String[] {"회원아이디","자원번호","분양번호","자원명","분양신청인","분양신청일","담당자","분양수량"};
 		DefaultTableModel model = new DefaultTableModel(headings, 0);
 		JScrollPane jsp = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		String query = "select 회원아이디,자원번호,분양번호,자원명,분양신청인,분양신청일,담당자,분양수량 from 분양";
-		ResultSet rs = db.executeQuery(query);
-		try {
-			String row[] = new String[8];
-			while (rs.next()) {
-				row[0] = rs.getString(1);
-				row[1] = Integer.toString(rs.getInt(2));
-				row[2] = Integer.toString(rs.getInt(3));
-				row[3] = rs.getString(4);
-				row[4] = rs.getString(5);
-				row[5] = rs.getString(6);
-				row[6] = rs.getString(7);
-				row[7] = Integer.toString(rs.getInt(8));
-				model.addRow(row);
-			}
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		frame.getContentPane().add(jsp);
 		jsp.setBounds(12, 41, 562, 170);
 		JTable table = new JTable(model);
 		jsp.setViewportView(table);
 		table.setFillsViewportHeight(true);
 		
+		JLabel SeedName1 = new JLabel("종자이름");
+		SeedName1.setBounds(58, 235, 53, 15);
+		frame.getContentPane().add(SeedName1);
 		
-		JLabel Label = new JLabel("종자이름");
-		Label.setBounds(58, 235, 53, 15);
-		frame.getContentPane().add(Label);
-		
-		textField = new JTextField();
-		textField.setBounds(114, 232, 106, 21);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		txSeedName1 = new JTextField();
+		txSeedName1.setBounds(114, 232, 106, 21);
+		frame.getContentPane().add(txSeedName1);
+		txSeedName1.setColumns(10);
 		
 		
-		//등록버튼
-		JButton btnAdd = new JButton("등록");
-		btnAdd.setBounds(232, 231, 95, 23);
-		frame.getContentPane().add(btnAdd);
-		btnAdd.addActionListener(new ActionListener() {
+		//검색버튼
+		JButton btnSearch = new JButton("검색");
+		btnSearch.setBounds(232, 231, 95, 23);
+		frame.getContentPane().add(btnSearch);
+		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 //				String SnameStr = tfSname.getText();
@@ -121,7 +112,6 @@ public class seed_devide_write {
 //					e1.printStackTrace();
 //				}		
 							
-				new seed_devide_view();
 				frame.setVisible(false);
 			}
 		});
@@ -141,13 +131,81 @@ public class seed_devide_write {
 		JButton btnExit = new JButton("종료");
 		btnExit.setBounds(448, 231, 95, 23);
 		frame.getContentPane().add(btnExit);
+		
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new seed_devide_view();
+				new main_view();
 				frame.setVisible(false);
 			}
 		});
-		frame.setVisible(true);
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("분양신청");
+		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_1.setBounds(12, 276, 88, 15);
+		frame.getContentPane().add(lblNewLabel_1);
 
+		//신청용 테이블
+		String[] headings2 = new String[] {"회원아이디","자원번호","분양번호","자원명","분양신청인","분양신청일","담당자","분양수량"};
+		DefaultTableModel model2 = new DefaultTableModel(headings, 0);
+		JScrollPane jsp2 = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		frame.getContentPane().add(jsp2);
+		jsp2.setBounds(12, 302, 562, 170);
+		JTable table2 = new JTable(model2);
+		jsp2.setViewportView(table2);
+		table2.setFillsViewportHeight(true);
+		
+		
+		//등록버튼
+				JButton btnAdd = new JButton("신청");
+				btnAdd.setBounds(339, 481, 95, 23);
+				frame.getContentPane().add(btnAdd);
+				btnAdd.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+//						String SnameStr = tfSname.getText();
+//						String FromStr = tfFrom.getText();
+//						String checksearch = cb_list.getSelectedItem().toString();
+//						// PreparedStatement 사용
+//						String sql = "select 자원명,수량,원산지,수집지,자원구분,평균수명 from 종자 where 자원명 = (?) and 원산지 = (?) and 자원구분 = (?)";
+//						try {
+//							PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+//							pstmt.setString(1,SnameStr);
+//							pstmt.setString(2,FromStr);
+//							pstmt.setString(3,checksearch);
+//							pstmt.executeQuery();
+//							pstmt.close();
+//						}catch(SQLException e1){
+//							e1.printStackTrace();
+//						}		
+									
+						frame.setVisible(false);
+					}
+				});
+		
+		JLabel SeedName2 = new JLabel("종자이름");
+		SeedName2.setBounds(58, 485, 53, 15);
+		frame.getContentPane().add(SeedName2);
+		
+		txSeedName2 = new JTextField();
+		txSeedName2.setColumns(10);
+		txSeedName2.setBounds(114, 482, 106, 21);
+		frame.getContentPane().add(txSeedName2);
+		
+		JLabel seedLeft = new JLabel("수량");
+		seedLeft.setBounds(232, 485, 31, 15);
+		frame.getContentPane().add(seedLeft);
+		
+		txSeedName3 = new JTextField();
+		txSeedName3.setColumns(10);
+		txSeedName3.setBounds(261, 482, 53, 21);
+		frame.getContentPane().add(txSeedName3);
+		
+
+		
+
+		
+		frame.setVisible(true);
 	}
 }
