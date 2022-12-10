@@ -18,7 +18,7 @@ public class DB_Conn_Query {
 	public CallableStatement cstmt = null;
 	
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String id = "C##bank";
+	String id = "bank";
 	String password = "1234";
 //	String id = "C##bank";
 	 public DB_Conn_Query() {

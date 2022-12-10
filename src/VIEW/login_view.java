@@ -110,7 +110,6 @@ public class login_view extends JFrame {
 				
 				loginSystem login = new loginSystem();
 				String m = login.loginSystem(id,pw);
-				
 				if(m==null) {
 					JOptionPane.showMessageDialog(null, "로그인에 실패했습니다.");
 				}
