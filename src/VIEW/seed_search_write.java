@@ -140,7 +140,7 @@ public class seed_search_write extends JFrame {
 						pstmt.setString(2,FromStr);
 						pstmt.setString(3,checksearch);
 						ResultSet rs = pstmt.executeQuery();
-						while(rs.next()) {			
+						while(rs.next()) {
 							row[0] = rs.getString(1);
 							row[1] = Integer.toString(rs.getInt(2)); 
 							row[2] = rs.getString(3);
