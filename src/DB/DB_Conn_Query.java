@@ -6,14 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.sql.PreparedStatement;
 
 import oracle.jdbc.OracleTypes;
 
 public class DB_Conn_Query {
-	
 	public Connection con = null;
 	public Statement stmt = null;
 	public Statement stmt2 = null;
+	public PreparedStatement pstmt = null;
+	
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String id = "bank";      String password = "1234";
 	
@@ -73,5 +75,13 @@ public class DB_Conn_Query {
 			}
 			
 			return src;
+		}
+		public Connection getConnection() {
+			if(con!= null) {
+				return con;
+			}
+			else {
+				return null;
+			}
 		}
 }

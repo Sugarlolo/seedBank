@@ -3,9 +3,13 @@ package VIEW;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import DB.DB_Conn_Query;
-
+import java.util.*;
 public class join_view extends JFrame {
 
 	private JPanel contentPane;
@@ -27,8 +31,10 @@ public class join_view extends JFrame {
 	private JTextField tfPassword;
 	private JTextField tfBirth;
 	private JTextField tfPhone;
-	private JTextField textField;
+	private JTextField tfDiv;
 	DB_Conn_Query db = new DB_Conn_Query();
+	
+	private boolean OK;
 
 	// 실행
 	public class Joinrun {
@@ -142,6 +148,7 @@ public class join_view extends JFrame {
 				}
 				else {
 					JOptionPane.showMessageDialog(null,"사용가능") ;
+					OK = true;
 				}
 				System.out.println(checkId);
 			}
@@ -149,41 +156,44 @@ public class join_view extends JFrame {
 		duplicateBtn.setBounds(350, 110, 70, 29);
 		contentPane.add(duplicateBtn);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(159, 366, 186, 35);
-		contentPane.add(textField);
-
-//		duplicateBtn.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				String idstr = tfUserID.getText();
-//				if (dao.isIDCheck(idstr) == true) {
-//					System.out.println("중복이 있습니다.. 다시 입력하세요!");
-//					// new main_view();
-//					// setvisible(false);
-//				} else {
-//					System.out.println("사용가능한 아이디 입니다!");
-//				}
-//
-//			}
-//		});
+		tfDiv = new JTextField();
+		tfDiv.setColumns(10);
+		tfDiv.setBounds(159, 366, 186, 35);
+		contentPane.add(tfDiv);
 
 		joinCompleteBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//user user = new user(tfUserID.getText(), tfPassword.getText(), tfUsername.getText(), tfBirth.getText(),
 				//		tfPhone.getText());
-				String idstr = tfUserID.getText();
-				String passtr = tfPassword.getText();
-				String Namestr = tfUsername.getText();
-				String Birthstr = tfBirth.getText();
-				String Phonestr = tfPhone.getText();
-			//	dao.insert_user(user);
+				String idStr = tfUserID.getText();
+				String pasStr = tfPassword.getText();
+				String nameStr = tfUsername.getText();
+				int y_old = Integer.parseInt(tfBirth.getText());
+				String phoneStr = tfPhone.getText();
+				String div = tfDiv.getText();
+				if (OK == true) {
+					String sql = "INSERT INTO 회원 VALUES (?,?,?,?,?,?)";
+						try {
+							PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+							pstmt.setString(1, idStr);
+							pstmt.setString(2, pasStr);
+							pstmt.setString(3, nameStr);
+							pstmt.setInt(4, y_old);
+							pstmt.setString(5,phoneStr);
+							pstmt.setString(6, div);
+							pstmt.executeUpdate();
+							pstmt.close();
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
+						dispose();
+						new login_view();
+						
+				}
+				else JOptionPane.showMessageDialog(null, "아이디 중복 체크를 하세요.");
 
-				JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
-				dispose();
 
 			}
 		});
