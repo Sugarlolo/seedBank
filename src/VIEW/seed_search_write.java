@@ -133,6 +133,7 @@ public class seed_search_write extends JFrame {
 				// PreparedStatement 사용
 				
 				String sql = "select 자원명,수량,원산지,수집지,자원구분,평균수명 from 종자 where 자원명 = (?) and 원산지 = (?) and 자원구분 = (?)";
+<<<<<<< HEAD
 				
 				try {
 					String row[] = new String[6];
@@ -149,13 +150,40 @@ public class seed_search_write extends JFrame {
 						row[4] = rs.getString(5);
 						row[5] = Integer.toString(rs.getInt(6)); 
 						model.addRow(row);
+=======
+					try {
+						String row[] = new String[6];
+						PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+						pstmt.setString(1,SnameStr);
+						pstmt.setString(2,FromStr);
+						pstmt.setString(3,checksearch);
+						ResultSet rs = pstmt.executeQuery();
+						while(rs.next()) {
+							row[0] = rs.getString(1);
+							row[1] = Integer.toString(rs.getInt(2)); 
+							row[2] = rs.getString(3);
+							row[3] = rs.getString(4);
+							row[4] = rs.getString(5);
+							row[5] = Integer.toString(rs.getInt(6)); 
+							model.addRow(row);
+						}
+						rs.close();
+						pstmt.close();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+>>>>>>> branch 'main' of https://github.com/Sugarlolo/seedBank.git
 					}
+<<<<<<< HEAD
 					rs.close();
 					pstmt.close();
 				}catch(SQLException e1){
 					e1.printStackTrace();
 				}
 				frame.setVisible(true);
+=======
+		
+				//frame.setVisible(false);
+>>>>>>> branch 'main' of https://github.com/Sugarlolo/seedBank.git
 			}
 		});
 	}

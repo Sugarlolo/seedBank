@@ -59,6 +59,53 @@ public class seed_ManagementUI extends JFrame {
 		manageLabel1.setBounds(40, 33, 57, 15);
 		getContentPane().add(manageLabel1);
 		
+		// 자원회수 테이블
+		
+		String[] headings2 = new String[] {"회원아이디","자원번호","분양번호","자원명","분양신청인","분양신청일","담당자","분양수량"};
+		DefaultTableModel model2 = new DefaultTableModel(headings2, 0);
+		JTable table2 = new JTable(model2);
+		table2.setEnabled(false);
+		JScrollPane jsp2 = new JScrollPane(table2,
+		JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		table2.setFillsViewportHeight(true);
+		getContentPane().add(jsp2);
+		jsp2.setBounds(145, 247, 715, 186);
+		
+		// 리프레시
+		JButton loadBtn = new JButton("불러오기");
+		loadBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				model2.setNumRows(0);
+				String sql = "SELECT 회원아이디,자원번호,분양번호,자원명,분양신청인,분양신청일,담당자,분양수량 FROM 분양";
+				try {
+					String row2[] = new String[8];
+					PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+					ResultSet rs = pstmt.executeQuery();
+					while(rs.next()) {
+						String t=rs.getString(6);
+						t=t.substring(0,10);
+						row2[0] = rs.getString(1);
+						row2[1] = Integer.toString(rs.getInt(2));
+						row2[2] = Integer.toString(rs.getInt(3));
+						row2[3] = rs.getString(4);
+						row2[4] = rs.getString(5);
+						row2[5] = t;
+						row2[6] = rs.getString(7);
+						row2[7] = Integer.toString(rs.getInt(8));
+						model2.addRow(row2);
+					}
+					
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+				
+			}
+		});
+		loadBtn.setBounds(22, 264, 97, 23);
+		getContentPane().add(loadBtn);
+		
+		
 		//자원현황 불러오기
 		
 		JComboBox dateComboBox = new JComboBox();
@@ -86,13 +133,13 @@ public class seed_ManagementUI extends JFrame {
 		String[] headings = new String[] {"자원번호","자원명","수량","원산지","수집지","자원구분","평균수명","공급직원번호","공급일자","공급량"};
 		model = new DefaultTableModel(headings, 0);
 		JTable table = new JTable(model);
+		table.setEnabled(false);
 		JScrollPane jsp = new JScrollPane(table,
 		JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 		JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		table.setFillsViewportHeight(true);
 		getContentPane().add(jsp);
 		jsp.setBounds(145, 26, 715, 186);
-		
 		
 		//자원현황 확인
 		
@@ -105,6 +152,7 @@ public class seed_ManagementUI extends JFrame {
 				System.out.println(selectedItem);
 				String sql = "select * from 종자 where 공급일자='"+selectedItem+"'";
 				ResultSet rs2 = db.executeQuery(sql);
+				System.out.println(sql);
 				try {
 					String row[] = new String[10];
 					while(rs2.next()){
