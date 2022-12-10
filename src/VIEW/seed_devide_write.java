@@ -185,32 +185,46 @@ public class seed_devide_write {
 
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String SeedName_str = txSeedName2.getText();
-				String SeedLeft_str = txSeedLeft.getText();
-				int num = 0;
-				String name ="";
+				String SeedName_str = txSeedName2.getText(); // 종자이름
+				String SeedLeft_str = txSeedLeft.getText(); // 분양수량
+				int num = 0; // 분양번호 카운트
+				String s_number ="";
+				
 				// PreparedStatement 사용
 				String sql = "select COUNT(*) from 분양";
+				// 분양번호 카운트
 				ResultSet rs = db.executeQuery(sql);
 				try {
 					while(rs.next()) {
 					num = rs.getInt(1);
 					}rs.close();
+					num++;
 					
 				}catch(SQLException e1){
 					e1.printStackTrace();
 				}
+				
+				// 자원번호 구하기
+				
 				String sql2 = "SELECT 자원번호 FROM 종자 WHERE 자원명 = '"+SeedName_str+"'";
 				ResultSet rs2 = db.executeQuery(sql2);
 				try {
 					while(rs2.next()) {
-						name = rs2.getString(1);
+						s_number = rs2.getString(1);
 					}rs2.close();
 				}catch(SQLException e2) {
 					e2.printStackTrace();
 				}
-				String sql3 = "INSERT INTO 분양 VALUES('qwer',"+name+","+num+",'"+SeedName_str+"',"
-						+ "'이원석','22/12/11',"+Integer.parseInt(SeedLeft_str); 
+				
+				String sql3 = "INSERT INTO 분양 VALUES('qwer',"+s_number+","+num+",'"+SeedName_str+"',"
+						+ "'이원석','22/12/11','001',"+Integer.parseInt(SeedLeft_str)+")";
+				ResultSet rs3 = db.executeQuery(sql3);
+				try {
+					rs3.next();
+				}catch (SQLException e3) {
+					e3.printStackTrace();
+				}
+				System.out.println(sql3);
 			
 			}
 		});

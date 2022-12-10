@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/user/git/seedBank/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jih86/git/seedBank/ojdbc8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

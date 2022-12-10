@@ -132,12 +132,9 @@ public class seed_search_write extends JFrame {
 				String checksearch = cb_list.getSelectedItem().toString();
 				// PreparedStatement 사용
 				
-<<<<<<< HEAD
+
 				String sql = "select 자원명,수량,원산지,수집지,자원구분,평균수명 from 종자 where 자원명 = (?) and 원산지 = (?) and 자원구분 = (?)";				
-=======
-				String sql = "select 자원명,수량,원산지,수집지,자원구분,평균수명 from 종자 where 자원명 = (?) and 원산지 = (?) and 자원구분 = (?)";
 				
->>>>>>> branch 'main' of https://github.com/Sugarlolo/seedBank.git
 				try {
 					String row[] = new String[6];
 					PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
