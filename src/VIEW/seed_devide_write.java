@@ -97,6 +97,7 @@ public class seed_devide_write {
 		frame.getContentPane().add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				model.setNumRows(0);
 				String SnameStr = txSeedName1.getText();
 				// PreparedStatement 사용
 				String sql = "select 자원번호,분양번호,자원명,담당자,분양수량 from 분양 where 자원명 = (?)";
@@ -187,7 +188,7 @@ public class seed_devide_write {
 		refreshBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				model2.setNumRows(0);
-				String sql = "select * from 분양 where 회원아이디 = 'qwer'";
+				String sql = "select * from 분양 where 회원아이디 = '"+ID+"'";
 				ResultSet rs = db.executeQuery(sql);
 				try {
 					String row[] = new String[8];
@@ -209,6 +210,7 @@ public class seed_devide_write {
 				}
 			}
 		});
+		
 		refreshBtn.setBounds(477, 481, 97, 23);
 		frame.getContentPane().add(refreshBtn);
 

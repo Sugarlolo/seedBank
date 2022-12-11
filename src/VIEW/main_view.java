@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 
 public class main_view extends JFrame {
@@ -31,6 +32,10 @@ public class main_view extends JFrame {
 		btn1.setBounds(66, 200, 100, 100); // 가로위치,세로위치,폭,넓이
 
 		Main_CP.add(btn2 = new JButton("자원분양"));
+		
+		JLabel idLabel = new JLabel(id);
+		idLabel.setBounds(166, 10, 57, 15);
+		getContentPane().add(idLabel);
 		btn2.setBounds(220, 200, 100, 100);
 
 

@@ -57,7 +57,7 @@ public class join_view extends JFrame {
 	public join_view() {
 		
 		super("회원가입");
-
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(463, 526);
 		setLocationRelativeTo(null);
