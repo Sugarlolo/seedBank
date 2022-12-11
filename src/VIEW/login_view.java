@@ -113,7 +113,7 @@ public class login_view extends JFrame {
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "로그인되었습니다.");
-					new main_view();
+					new main_view(id);
 					dispose();
 				}
 			}	

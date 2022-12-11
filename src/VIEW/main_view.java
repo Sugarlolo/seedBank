@@ -12,7 +12,11 @@ import javax.swing.JFrame;
 
 
 public class main_view extends JFrame {
-	public main_view() {
+	private String ID;
+	
+	
+	public main_view(String id) {
+		ID=id;
 		setTitle("종자은행메뉴");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// x 누르면 프로세스 종료		
 		Container Main_CP = getContentPane(); // 컨텐트팬 생성
@@ -42,7 +46,7 @@ public class main_view extends JFrame {
 		// 자원분양 버튼 처리
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new seed_devide_write(); 
+				new seed_devide_write(id); 
 				dispose();
 			}
 		});

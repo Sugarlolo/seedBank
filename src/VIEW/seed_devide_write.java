@@ -22,7 +22,7 @@ import DB.DB_Conn_Query;
 
 import java.awt.Font;
 public class seed_devide_write {
-	public static String ID;
+	public String ID;
 	private JFrame frame;
 	private JTextField txSeedName1;
 	private JTextField txSeedName2;
@@ -37,7 +37,7 @@ public class seed_devide_write {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					seed_devide_write window = new seed_devide_write();
+					seed_devide_write window = new seed_devide_write("20173070");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,8 +49,9 @@ public class seed_devide_write {
 	/**
 	 * Create the application.
 	 */
-	public seed_devide_write() {
+	public seed_devide_write(String id) {
 		initialize();
+		ID=id;
 	}
 
 	/**
@@ -64,7 +65,6 @@ public class seed_devide_write {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		String ID;
 
 		JLabel lblNewLabel = new JLabel("분양검색");
 		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 20));
@@ -139,7 +139,7 @@ public class seed_devide_write {
 
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new main_view();
+				new main_view(ID);
 				frame.setVisible(false);
 			}
 		});
