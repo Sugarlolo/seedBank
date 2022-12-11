@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -29,6 +31,7 @@ public class seed_devide_write {
 	private JTextField txSeedLeft;
 	String idstr = loginSystem.getInstance().getId();
 	DB_Conn_Query db = new DB_Conn_Query();
+	
 
 	/**
 	 * Launch the application.
@@ -58,6 +61,10 @@ public class seed_devide_write {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		SimpleDateFormat s_date = new SimpleDateFormat("yy/MM/dd");
+		Date today = new Date();
+		
 		frame = new JFrame();
 		frame.setTitle("종자분양신청하기");
 		frame.setBounds(100, 100, 605, 561);
@@ -220,6 +227,7 @@ public class seed_devide_write {
 				String SeedLeft_str = txSeedLeft.getText(); // 분양수량
 				int num = 0; // 분양번호 카운트
 				String s_number ="";
+				String a_name = ""; // 회원아이디
 				
 				// PreparedStatement 사용
 				String sql = "select COUNT(*) from 분양";
@@ -229,7 +237,7 @@ public class seed_devide_write {
 					while(rs.next()) {
 					num = rs.getInt(1);
 					}rs.close();
-					num++;
+					num+=1;
 					
 				}catch(SQLException e1){
 					e1.printStackTrace();
@@ -247,9 +255,20 @@ public class seed_devide_write {
 					e2.printStackTrace();
 				}
 				
-				String sql3 = "INSERT INTO 분양 VALUES('qwer',"+s_number+","+num+",'"+SeedName_str+"',"
-						+ "'이원석','22/12/11','001',"+Integer.parseInt(SeedLeft_str)+")";
+				String sql4 = "select 이름 from 회원 where 회원아이디 = '"+ID+"'";
+				ResultSet rs4 = db.executeQuery(sql4);
+				try {
+					while(rs4.next()) {
+						a_name = rs4.getString(1);
+					}
+				} catch (SQLException e4) {
+					e4.printStackTrace();
+				}
+				
+				String sql3 = "INSERT INTO 분양 VALUES('"+ID+"',"+s_number+","+num+",'"+SeedName_str+"','"
+						+a_name+"','"+s_date.format(today)+"','001',"+Integer.parseInt(SeedLeft_str)+")";
 				ResultSet rs3 = db.executeQuery(sql3);
+				
 				System.out.println(sql3);
 			}
 		});

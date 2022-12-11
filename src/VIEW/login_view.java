@@ -105,7 +105,6 @@ public class login_view extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String id = userText.getText();
 				String pw = String.valueOf(passText.getPassword());
-				
 				loginSystem login = new loginSystem();
 				String m = login.loginSystem(id,pw);
 				if(m==null) {
