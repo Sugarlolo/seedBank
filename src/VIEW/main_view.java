@@ -42,7 +42,7 @@ public class main_view extends JFrame {
 		//  종자검색 버튼처리
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new seed_search_write();
+				new seed_search_write(id);
 				dispose();
 				
 			}

@@ -27,9 +27,9 @@ public class join_view extends JFrame {
 	private JButton joinCompleteBtn;
 	private JButton duplicateBtn;
 	private JTextField tfUserID;
-	private JTextField tfUsername;
-	private JTextField tfPassword;
-	private JTextField tfBirth;
+	private JTextField tfAge;
+	private JTextField tfNAME;
+	private JTextField tfPW;
 	private JTextField tfPhone;
 	private JTextField tfDiv;
 	DB_Conn_Query db = new DB_Conn_Query();
@@ -82,7 +82,7 @@ public class join_view extends JFrame {
 		lblName.setBounds(69, 213, 52, 15);
 		contentPane.add(lblName);
 
-		JLabel lblBirth = new JLabel("생년월일");
+		JLabel lblBirth = new JLabel("나이");
 		lblBirth.setBounds(69, 267, 69, 20);
 		contentPane.add(lblBirth);
 
@@ -99,20 +99,20 @@ public class join_view extends JFrame {
 		tfUserID.setBounds(159, 106, 186, 35);
 		contentPane.add(tfUserID);
 
-		tfPassword = new JTextField();
-		tfPassword.setColumns(10);
-		tfPassword.setBounds(159, 203, 186, 35);
-		contentPane.add(tfPassword);
+		tfNAME = new JTextField();
+		tfNAME.setColumns(10);
+		tfNAME.setBounds(159, 203, 186, 35);
+		contentPane.add(tfNAME);
 
-		tfUsername = new JTextField();
-		tfUsername.setColumns(10);
-		tfUsername.setBounds(159, 257, 186, 35);
-		contentPane.add(tfUsername);
+		tfAge = new JTextField();
+		tfAge.setColumns(10);
+		tfAge.setBounds(159, 257, 186, 35);
+		contentPane.add(tfAge);
 
-		tfBirth = new JTextField();
-		tfBirth.setColumns(10);
-		tfBirth.setBounds(159, 156, 186, 35);
-		contentPane.add(tfBirth);
+		tfPW = new JTextField();
+		tfPW.setColumns(10);
+		tfPW.setBounds(159, 156, 186, 35);
+		contentPane.add(tfPW);
 
 		tfPhone = new JTextField();
 		tfPhone.setColumns(10);
@@ -169,9 +169,9 @@ public class join_view extends JFrame {
 				//user user = new user(tfUserID.getText(), tfPassword.getText(), tfUsername.getText(), tfBirth.getText(),
 				//		tfPhone.getText());
 				String idStr = tfUserID.getText();
-				String pasStr = tfPassword.getText();
-				String nameStr = tfUsername.getText();
-				int y_old = Integer.parseInt(tfBirth.getText());
+				String pasStr = tfPW.getText();
+				String nameStr = tfNAME.getText();
+				int y_old = Integer.parseInt(tfAge.getText());
 				String phoneStr = tfPhone.getText();
 				String div = tfDiv.getText();
 				if (OK == true) {
@@ -186,7 +186,7 @@ public class join_view extends JFrame {
 							pstmt.setInt(4, y_old);
 							pstmt.setString(5,phoneStr);
 							pstmt.setString(6, div);
-							pstmt.executeUpdate();
+							pstmt.executeQuery();
 							pstmt.close();
 						} catch (SQLException e1) {
 							e1.printStackTrace();

@@ -30,7 +30,7 @@ public class seed_search_write extends JFrame {
 	private JTextField tfFrom;
 	private JTextField tfSname;
 	private JFrame frame;
-
+	public String ID;
 	DB_Conn_Query db = new DB_Conn_Query();
 
 	/**
@@ -52,7 +52,8 @@ public class seed_search_write extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public seed_search_write() {
+	public seed_search_write(String id) {
+		ID=id;
 		initialize();
 	}
 
@@ -60,7 +61,6 @@ public class seed_search_write extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
 		frame = new JFrame("자원정보검색");
 		frame.setBounds(100, 100, 463, 526);
 		frame.setLocationRelativeTo(null);
@@ -68,6 +68,16 @@ public class seed_search_write extends JFrame {
 		contentPane = new JPanel();
 		frame.setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JButton btnNewButton = new JButton("메인 메뉴");
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new main_view(ID);
+            }
+        });
+        btnNewButton.setBounds(249, 242, 95, 23);
+        contentPane.add(btnNewButton);
 
 		// 누락되어있었음
 		frame.setVisible(true);

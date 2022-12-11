@@ -11,6 +11,7 @@ import Controller.loginSystem;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,15 +54,15 @@ public class seed_devide_write {
 	 * Create the application.
 	 */
 	public seed_devide_write(String id) {
-		initialize();
 		ID=id;
+		initialize(id);
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		
+	private void initialize(String id) {
 		SimpleDateFormat s_date = new SimpleDateFormat("yy/MM/dd");
 		Date today = new Date();
 		
@@ -191,6 +192,8 @@ public class seed_devide_write {
 		btnAdd.setBounds(339, 481, 95, 23);
 		frame.getContentPane().add(btnAdd);
 		
+		//분양 조회버튼
+		
 		JButton refreshBtn = new JButton("새로고침");
 		refreshBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -221,6 +224,8 @@ public class seed_devide_write {
 		refreshBtn.setBounds(477, 481, 97, 23);
 		frame.getContentPane().add(refreshBtn);
 
+		//분양 신청버튼
+		
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String SeedName_str = txSeedName2.getText(); // 종자이름
@@ -229,7 +234,6 @@ public class seed_devide_write {
 				String s_number ="";
 				String a_name = ""; // 회원아이디
 				
-				// PreparedStatement 사용
 				String sql = "select COUNT(*) from 분양";
 				// 분양번호 카운트
 				ResultSet rs = db.executeQuery(sql);
@@ -270,7 +274,16 @@ public class seed_devide_write {
 				ResultSet rs3 = db.executeQuery(sql3);
 				
 				System.out.println(sql3);
+				
+				try {
+					CallableStatement cstmt = db.getConnection().prepareCall("{call p_담당자}");
+				} catch (SQLException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
 			}
+			
+			
 		});
 
 		frame.setVisible(true);
